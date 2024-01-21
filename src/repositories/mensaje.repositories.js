@@ -28,9 +28,20 @@ export const getbyIdMensaje = (id) => {
 
 export const PostUMensaje = (mensaje,fecha,idUsuario,idChat) => {
     return new Promise((resolve, reject) => {
-       const consQuery = "INSERT INTO usuario (mensaje,fecha,idUsuario,idChatPrivado) values (?,?,?,?)";
+       const consQuery = "INSERT INTO mensaje (mensaje,fecha,idUsuario,idChatPrivado) values (?,?,?,?)";
       database
         .execute(consQuery, [mensaje,fecha,idUsuario,idChat])
+        .then((result) => {
+          resolve(result);
+        })
+        .catch((err) => reject(err));
+    });
+  };
+  export const putMensaje = (id, mensaje) => {
+    return new Promise((resolve, reject) => {
+      const consQuery = "UPDATE mensaje SET mensaje = ? WHERE idMensaje = ?";
+      database
+        .execute(consQuery, [mensaje, id]) // Cambiado el orden de los valores aquí
         .then((result) => {
           resolve(result);
         })
