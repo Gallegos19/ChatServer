@@ -20,16 +20,26 @@ function ConectarSocket(servidor) {
     socket.emit('mensaje', '¡Bienvenido! Estás conectado.');
     socket.on("mensaje", (msg) => {
         console.log(msg)
+        io.emit('mensaje',msg)
 
       });
 
-    socket.on("join room", (roomNumber) => {
+      socket.broadcast.emit('chat_message',{
+        usuario:'INFO',
+        mensaje:'Se ha contectado un nuevo usuario'
+      });
+      
+    socket.on('chat_message', (data) => {
+      io.emit('chat_message', data);
+  });
+
+    socket.on("join_room", (roomNumber) => {
       const roomName = `Room ${roomNumber}`;
       socket.join(roomName);
       console.log(`Usuario se unió a ${roomName}`);
     });
 
-    socket.on("chat message", (msg, roomNumber) => {
+    socket.on("chat_message2", (msg, roomNumber) => {
       const roomName = `Room ${roomNumber}`;
       io.to(roomName).emit("chat message", msg);
       console.log(`Mensaje en ${roomName}: ${msg}`);

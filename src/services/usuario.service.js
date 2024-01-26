@@ -60,7 +60,8 @@ export const PostofUsuario = async (Usuario) => {
         const token = Jwt.sign(payload, JwtToken, { expiresIn: '2h' });
         return resolve({
           message: 'Accesso Permitido',
-          token
+          token,
+          id: emailEncontrado[0].idUsuario
         });
       } catch (error) {
         return reject(error);

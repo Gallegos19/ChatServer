@@ -16,7 +16,7 @@ dotenv.config();
 app.set("PORT", process.env.PORT || 3003);
 const server = createServer(app);
 ConectarSocket(server);
-const PORT = process.env.PORT || 3001;
+ const PORT = process.env.PORT || 3001;
 
 
 server.listen(PORT, () => {

@@ -27,7 +27,8 @@ export const login = async (req, res) =>{
             // Aquí puedes hacer algo con la respuesta
             res.status(200).json({
                 message: 'Acceso permitido',
-                token: resp.token // Supongamos que la respuesta tiene un token
+                token: resp.token ,// Supongamos que la respuesta tiene un token
+                id: resp.id
             });
         } else {
             res.status(401).json({
