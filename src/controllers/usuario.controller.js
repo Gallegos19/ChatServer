@@ -1,4 +1,4 @@
-import { PostofUsuario, loginUsuario } from '../services/usuario.service.js';
+import { PostofUsuario, loginUsuario, getIdUser } from '../services/usuario.service.js';
 
 export const createUser = async (req, res) => {
     try {
@@ -16,7 +16,19 @@ export const createUser = async (req, res) => {
         });
     }
 };
-
+export const getbyIdUser = async (req, res) => {
+    try {
+      const {id} = req.params;
+      const result = await getIdUser(id);
+  
+      return res.status(200).json({
+        message: "¡Funciona correctamente!",
+        data: result,
+      });
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
+    }
+  };
 export const login = async (req, res) =>{
     try {
         const {correo, contrasena} = req.body;

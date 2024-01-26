@@ -12,6 +12,18 @@ export const getUsuario = () => {
       .catch((err) => reject(err));
   });
 };
+export const getbyIdUser = (id) => {
+  return new Promise((resolve, reject) => {
+    const consQuery = "SELECT * FROM usuario where idUsuario = ? limit 1";
+    database
+      .execute(consQuery, [id])
+      .then((result) => {
+       
+        resolve(result[0]);
+      })
+      .catch((err) => reject(err));
+  });
+};
 
 export const getbyCorreoUsuario = (correo) => {
   return new Promise((resolve, reject) => {

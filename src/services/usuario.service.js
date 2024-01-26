@@ -1,5 +1,5 @@
 import { validarUsuario } from "../validations/usuario.validation.js";
-import { PostUsuario , getbyCorreoUsuario} from "../repositories/usuario.repositories.js";
+import { PostUsuario , getbyCorreoUsuario, getbyIdUser} from "../repositories/usuario.repositories.js";
 import bcrypt from 'bcrypt';
 import Jwt  from "jsonwebtoken";
 const saltosBcrypt= process.env.SALTOS;
@@ -29,6 +29,15 @@ export const PostofUsuario = async (Usuario) => {
     }
   };
   
+  export const getIdUser = async (id) => {
+    try {
+      const result = await getbyIdUser(id);
+      console.log(result);
+      return (result[0]);
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  };
   export const loginUsuario = async (correo, password) => {
     return new Promise(async (resolve, reject) => {
       try {
